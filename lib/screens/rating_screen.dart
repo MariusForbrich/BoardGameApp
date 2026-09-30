@@ -100,7 +100,7 @@ class _RatingScreenState extends State<RatingScreen> {
               ),
               const SizedBox(height: 8),
               _StarRow(
-                label: 'Gastgeber:in',
+                label: 'Gastgeber',
                 value: _hostRating,
                 onChanged: (v) => setState(() => _hostRating = v),
               ),
@@ -259,7 +259,7 @@ class _HostNameLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (hostPlayerId.isEmpty) {
-      return const Text('noch kein:e Gastgeber:in');
+      return const Text('noch kein Gastgeber');
     }
     return FutureBuilder<Player?>(
       future: FirestoreService().getPlayer(hostPlayerId),
