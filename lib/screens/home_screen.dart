@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.person_add_alt),
-              tooltip: 'Spieler:in hinzufügen',
+              tooltip: 'Spieler hinzufügen',
               onPressed: () => _showAddPlayerDialog(context),
             ),
           ],
@@ -57,13 +57,13 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-/// Dialog zum schnellen Anlegen einer neuen Spieler:in (Name reicht).
+/// Anlegen eines Spielers
 void _showAddPlayerDialog(BuildContext context) {
   final controller = TextEditingController();
   showDialog(
     context: context,
     builder: (dialogContext) => AlertDialog(
-      title: const Text('Spieler:in hinzufügen'),
+      title: const Text('Spieler hinzufügen'),
       content: TextField(
         controller: controller,
         autofocus: true,
@@ -158,7 +158,7 @@ class _SessionDetails extends StatelessWidget {
           FilledButton.icon(
             onPressed: () => _showHostPicker(context, session.id),
             icon: const Icon(Icons.swap_horiz),
-            label: const Text('Gastgeber:in ändern'),
+            label: const Text('Gastgeber ändern'),
           ),
         ],
       ),
@@ -170,7 +170,7 @@ class _SessionDetails extends StatelessWidget {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Gastgeber:in wählen'),
+        title: const Text('Gastgeber wählen'),
         content: SizedBox(
           width: double.maxFinite,
           child: StreamBuilder<List<Player>>(
@@ -187,7 +187,7 @@ class _SessionDetails extends StatelessWidget {
                 return const Padding(
                   padding: EdgeInsets.all(16),
                   child: Text(
-                    'Noch keine Spieler:innen angelegt. '
+                    'Noch keine Spieler angelegt. '
                     'Über das Symbol oben rechts hinzufügen.',
                   ),
                 );
@@ -232,7 +232,7 @@ class _HostRow extends StatelessWidget {
         children: [
           Icon(Icons.person_outline),
           SizedBox(width: 8),
-          Text('Noch kein:e Gastgeber:in festgelegt'),
+          Text('Noch keinen Gastgeber festgelegt'),
         ],
       );
     }
@@ -245,7 +245,7 @@ class _HostRow extends StatelessWidget {
           children: [
             const Icon(Icons.person_outline),
             const SizedBox(width: 8),
-            Text('Gastgeber:in: $name'),
+            Text('Gastgeber: $name'),
           ],
         );
       },
