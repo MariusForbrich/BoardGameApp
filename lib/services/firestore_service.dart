@@ -6,7 +6,7 @@ import '../models/suggestion.dart';
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // --- Players ---
+  // Player
 
   Future<void> createPlayer(Player player) async {
     await _db.collection('players').doc(player.id).set(player.toMap());
@@ -34,7 +34,7 @@ class FirestoreService {
     return doc.id;
   }
 
-  // --- Sessions (Story 1: nächsten Termin anzeigen) ---
+  // nächsten Termin anzeigen
 
   Stream<GameSession?> getUpcomingSession() {
     return _db
@@ -55,7 +55,7 @@ class FirestoreService {
     return doc.id;
   }
 
-  // --- Sessions (Story 2: rotierendes Gastgeber:in-Prinzip) ---
+  // hostplayer
 
   Future<void> setHost(String sessionId, String playerId) async {
     await _db.collection('sessions').doc(sessionId).update({
@@ -63,7 +63,7 @@ class FirestoreService {
     });
   }
 
-  // --- Suggestions (Story 3: Spiele vorschlagen) ---
+  // Spiele vorschlagen
 
   Stream<List<GameSuggestion>> getSuggestions(String sessionId) {
     return _db
@@ -80,10 +80,10 @@ class FirestoreService {
     await _db.collection('suggestions').add(suggestion.toMap());
   }
 
-  // --- Votes (Story 4: über Spiele abstimmen) ---
+  // Voting
 
   Future<void> castVote(String suggestionId, String playerId, int value) async {
-    // Eine Stimme pro Person und Vorschlag -> feste Dokument-ID statt add()
+   
     final voteId = '${suggestionId}_$playerId';
     await _db.collection('votes').doc(voteId).set({
       'suggestionId': suggestionId,
@@ -105,7 +105,7 @@ class FirestoreService {
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  // --- Ratings (Story 5: Gastgeber:in/Essen/Abend bewerten) ---
+  // Rating
 
   Future<void> addRating(
     String sessionId,
@@ -133,7 +133,7 @@ class FirestoreService {
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  // --- Messages (Story 6: Kurznachricht an die Gruppe) ---
+  // Nachrichten
 
   Stream<List<Map<String, dynamic>>> getMessages(String sessionId) {
     return _db
