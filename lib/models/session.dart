@@ -5,7 +5,7 @@ class GameSession {
   final DateTime date;
   final String location;
   final String hostPlayerId;
-  final String status; // 'geplant' | 'abgeschlossen'
+  final String status; 
 
   GameSession({
     required this.id,
